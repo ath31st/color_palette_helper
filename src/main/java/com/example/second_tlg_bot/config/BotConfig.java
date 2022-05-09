@@ -1,6 +1,7 @@
 package com.example.second_tlg_bot.config;
 
 import com.example.second_tlg_bot.TelegramBot;
+import com.example.second_tlg_bot.service.SendMessageService;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -23,5 +24,9 @@ public class BotConfig {
         telegramBot.setBOT_TOKEN(BOT_TOKEN);
 
         return telegramBot;
+    }
+    @Bean
+    public SendMessageService sendMessageService() {
+        return new SendMessageService();
     }
 }

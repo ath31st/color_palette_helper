@@ -1,8 +1,9 @@
 package com.example.second_tlg_bot;
 
+import com.example.second_tlg_bot.service.SendMessageService;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
@@ -10,6 +11,8 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 public class TelegramBot extends TelegramLongPollingBot {
     private String BOT_NAME;
     private String BOT_TOKEN;
+    @Autowired
+    private SendMessageService service;
 
     @Override
     public String getBotUsername() {
@@ -23,12 +26,11 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update update) {
-        if (update.getMessage() != null && update.getMessage().hasText()) {
-            String chatId = String.valueOf(update.getMessage().getChatId());
+        if (update.hasMessage() && update.getMessage().hasText()) {
             try {
-                execute(new SendMessage(chatId, "Hi"));
+                execute(service.createStartMessage(update));
             } catch (TelegramApiException e) {
-                e.printStackTrace();
+                throw new RuntimeException(e);
             }
         }
     }
