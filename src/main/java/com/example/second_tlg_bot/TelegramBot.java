@@ -28,10 +28,31 @@ public class TelegramBot extends TelegramLongPollingBot {
     public void onUpdateReceived(Update update) {
         if (update.hasMessage() && update.getMessage().hasText()) {
             try {
-                execute(service.createPhotoMessage(update));
-                //execute(service.createStartMessage(update));
+                // create file with config hexcode!
+                // after that - menu
+                execute(service.createMenuMessage(update));
             } catch (TelegramApiException e) {
                 throw new RuntimeException(e);
+            }
+        }
+        if (update.hasCallbackQuery()) {
+            String callBachDate = update.getCallbackQuery().getData();
+            switch (callBachDate) {
+                case "COMPLEMENTARY":
+                    try {
+                        execute(service.createPhotoMessage(update));
+                        execute(service.createMessage(update));
+                    } catch (TelegramApiException e) {
+                        throw new RuntimeException(e);
+                    }
+//                case "MONOCHROMATIC":
+//                    execute();
+//                case "ANALOGOUS":
+//                    execute();
+//                case "TRIADIC":
+//                    execute();
+//                case "TETRADIC":
+//                    execute();
             }
         }
     }
