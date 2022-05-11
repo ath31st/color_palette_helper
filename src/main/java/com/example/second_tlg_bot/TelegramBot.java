@@ -28,7 +28,8 @@ public class TelegramBot extends TelegramLongPollingBot {
     public void onUpdateReceived(Update update) {
         if (update.hasMessage() && update.getMessage().hasText()) {
             try {
-                execute(service.createStartMessage(update));
+                execute(service.createPhotoMessage(update));
+                //execute(service.createStartMessage(update));
             } catch (TelegramApiException e) {
                 throw new RuntimeException(e);
             }
