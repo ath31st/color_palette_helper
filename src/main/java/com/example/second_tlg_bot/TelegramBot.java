@@ -35,7 +35,8 @@ public class TelegramBot extends TelegramLongPollingBot {
             // todo would make check on valid hexcode in inputText
 
             try {
-                palette.createPalette(inputText);
+                palette.setHexCode(inputText);
+                palette.createPalette();
 
                 execute(service.createPhotoMessage(chatId));
                 execute(service.createMessage(chatId, palette.toString()));
@@ -48,7 +49,7 @@ public class TelegramBot extends TelegramLongPollingBot {
             String chatId = String.valueOf(update.getCallbackQuery().getMessage().getChatId());
             String callBachDate = update.getCallbackQuery().getData();
             switch (callBachDate) {
-                case "COMPLEMENTARY":
+                case "complementary":
                     palette.applyComplementaryMode();
                     try {
                         execute(service.createPhotoMessage(chatId));
@@ -56,14 +57,43 @@ public class TelegramBot extends TelegramLongPollingBot {
                     } catch (TelegramApiException e) {
                         throw new RuntimeException(e);
                     }
-//                case "MONOCHROMATIC":
-//                    execute();
-//                case "ANALOGOUS":
-//                    execute();
-//                case "TRIADIC":
-//                    execute();
-//                case "TETRADIC":
-//                    execute();
+                    break;
+                case "monochromatic":
+                    palette.applyMonochromaticMode();
+                    try {
+                        execute(service.createPhotoMessage(chatId));
+                        execute(service.createMenuMessage(chatId));
+                    } catch (TelegramApiException e) {
+                        throw new RuntimeException(e);
+                    }
+                    break;
+                case "analogous":
+                    palette.applyAnalogousMode();
+                    try {
+                        execute(service.createPhotoMessage(chatId));
+                        execute(service.createMenuMessage(chatId));
+                    } catch (TelegramApiException e) {
+                        throw new RuntimeException(e);
+                    }
+                    break;
+                case "triadic":
+                    palette.applyTriadicMode();
+                    try {
+                        execute(service.createPhotoMessage(chatId));
+                        execute(service.createMenuMessage(chatId));
+                    } catch (TelegramApiException e) {
+                        throw new RuntimeException(e);
+                    }
+                    break;
+                case "tetradic":
+                    palette.applyTetradicMode();
+                    try {
+                        execute(service.createPhotoMessage(chatId));
+                        execute(service.createMenuMessage(chatId));
+                    } catch (TelegramApiException e) {
+                        throw new RuntimeException(e);
+                    }
+                    break;
             }
         }
     }

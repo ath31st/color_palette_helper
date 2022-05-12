@@ -19,7 +19,7 @@ public class SendMessageService {
     public SendMessage createMenuMessage(String chatId) {
         SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(chatId);
-        sendMessage.setText("Select the desired palette: ");
+        sendMessage.setText("Choose the type of color combination");
         InlineKeyboardMarkup inlineKeyboardMarkup = buttonService.setInlineKeyMarkup(buttonService.createInlineButton());
         sendMessage.setReplyMarkup(inlineKeyboardMarkup);
         return sendMessage;

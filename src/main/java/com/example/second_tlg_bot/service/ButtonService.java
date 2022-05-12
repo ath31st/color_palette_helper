@@ -14,24 +14,24 @@ public class ButtonService {
         List<InlineKeyboardButton> inlineKeyboardButtonsRow1 = new ArrayList<>();
         List<InlineKeyboardButton> inlineKeyboardButtonsRow2 = new ArrayList<>();
         InlineKeyboardButton inlineKeyboardButton1 = new InlineKeyboardButton();
-        inlineKeyboardButton1.setText("COMPLEMENTARY");
-        inlineKeyboardButton1.setCallbackData("COMPLEMENTARY");
+        inlineKeyboardButton1.setText("omplementary");
+        inlineKeyboardButton1.setCallbackData("complementary");
 
         InlineKeyboardButton inlineKeyboardButton2 = new InlineKeyboardButton();
-        inlineKeyboardButton2.setText("MONOCHROMATIC");
-        inlineKeyboardButton2.setCallbackData("MONOCHROMATIC");
+        inlineKeyboardButton2.setText("monochromatic");
+        inlineKeyboardButton2.setCallbackData("monochromatic");
 
         InlineKeyboardButton inlineKeyboardButton3 = new InlineKeyboardButton();
-        inlineKeyboardButton3.setText("ANALOGOUS");
-        inlineKeyboardButton3.setCallbackData("ANALOGOUS");
+        inlineKeyboardButton3.setText("analogous");
+        inlineKeyboardButton3.setCallbackData("analogous");
 
         InlineKeyboardButton inlineKeyboardButton4 = new InlineKeyboardButton();
-        inlineKeyboardButton4.setText("TRIADIC");
-        inlineKeyboardButton4.setCallbackData("TRIADIC");
+        inlineKeyboardButton4.setText("triadic");
+        inlineKeyboardButton4.setCallbackData("triadic");
 
         InlineKeyboardButton inlineKeyboardButton5 = new InlineKeyboardButton();
-        inlineKeyboardButton5.setText("TETRADIC");
-        inlineKeyboardButton5.setCallbackData("TETRADIC");
+        inlineKeyboardButton5.setText("tetradic");
+        inlineKeyboardButton5.setCallbackData("tetradic");
 
         inlineKeyboardButtonsRow1.add(inlineKeyboardButton1);
         inlineKeyboardButtonsRow1.add(inlineKeyboardButton2);
