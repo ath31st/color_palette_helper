@@ -1,5 +1,6 @@
 package com.example.second_tlg_bot;
 
+import com.example.second_tlg_bot.service.FileService;
 import com.example.second_tlg_bot.service.SendMessageService;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,8 @@ public class TelegramBot extends TelegramLongPollingBot {
     private Palette palette;
     @Autowired
     private SendMessageService service;
+    @Autowired
+    private FileService fileService;
 
     @Override
     public String getBotUsername() {
@@ -35,7 +38,7 @@ public class TelegramBot extends TelegramLongPollingBot {
             // todo would make check on valid hexcode in inputText
 
             try {
-                palette.createPalette(chatId,inputText);
+                palette.createPalette(chatId, inputText);
 
                 execute(service.createPhotoMessage(chatId));
                 execute(service.createMessage(chatId, palette.toString()));
@@ -49,7 +52,6 @@ public class TelegramBot extends TelegramLongPollingBot {
             String callBachDate = update.getCallbackQuery().getData();
             switch (callBachDate) {
                 case "complementary":
-                  //  palette. // retrieve file and work with him
                     palette.applyComplementaryMode(chatId);
                     try {
                         execute(service.createPhotoMessage(chatId));

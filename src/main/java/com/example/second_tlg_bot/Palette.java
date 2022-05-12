@@ -1,40 +1,25 @@
 package com.example.second_tlg_bot;
 
+import com.example.second_tlg_bot.service.FileService;
 import com.example.second_tlg_bot.util.HSLColor;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.imageio.ImageIO;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 @Component
 @Getter
 @Setter
+@RequiredArgsConstructor
 public class Palette {
 
-    private void saveImageToFile(BufferedImage bufferedImage, String fileName) {
-        try {
-            ImageIO.write(bufferedImage, "jpg", new File("src/main/resources/images/" + fileName + ".jpg"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public BufferedImage readImageFromFile(String fileName) {
-        try {
-            return ImageIO.read(new File("src/main/resources/images/" + fileName + ".jpg"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private void deleteImageFile() {
-
-    }
+    @Autowired
+    private final FileService fileService;
 
     public void createPalette(String nameFileAsChatId, String hexCode) {
         BufferedImage bufferedImage = new BufferedImage(600, 100, BufferedImage.TYPE_INT_RGB);
@@ -43,11 +28,11 @@ public class Palette {
 
         drawRectangle600x100(graphics, color);
         drawTextOnGraphics(graphics, color, 0);
-        saveImageToFile(bufferedImage, nameFileAsChatId);
+        fileService.saveImageToFile(bufferedImage, nameFileAsChatId);
     }
 
     public void applyComplementaryMode(String nameFileAsChatId) {
-        BufferedImage bufferedImage = readImageFromFile(nameFileAsChatId);
+        BufferedImage bufferedImage = fileService.readImageFromFile(nameFileAsChatId);
 
         Graphics graphics = bufferedImage.createGraphics();
         Color color = new Color(bufferedImage.getRGB(0, 0));
@@ -61,11 +46,11 @@ public class Palette {
         drawTextOnGraphics(graphics, color, 300);
 
         graphics.dispose();
-        saveImageToFile(bufferedImage, nameFileAsChatId);
+        fileService.saveImageToFile(bufferedImage, nameFileAsChatId);
     }
 
     public void applyAnalogousMode(String nameFileAsChatId) {
-        BufferedImage bufferedImage = readImageFromFile(nameFileAsChatId);
+        BufferedImage bufferedImage = fileService.readImageFromFile(nameFileAsChatId);
 
         Graphics graphics = bufferedImage.createGraphics();
         Color color = new Color(bufferedImage.getRGB(0, 0));
@@ -75,20 +60,20 @@ public class Palette {
         HSLColor hslColor = new HSLColor(color);
         color = hslColor.adjustHue(hslColor.getHue() + 30);
 
-        drawRectangle200x100(graphics,color,200);
-        drawTextOnGraphics(graphics,color,200);
+        drawRectangle200x100(graphics, color, 200);
+        drawTextOnGraphics(graphics, color, 200);
 
         color = hslColor.adjustHue(hslColor.getHue() + 330);
 
-        drawRectangle200x100(graphics,color,400);
-        drawTextOnGraphics(graphics,color,400);
+        drawRectangle200x100(graphics, color, 400);
+        drawTextOnGraphics(graphics, color, 400);
         graphics.dispose();
 
-        saveImageToFile(bufferedImage, nameFileAsChatId);
+        fileService.saveImageToFile(bufferedImage, nameFileAsChatId);
     }
 
     public void applyTriadicMode(String nameFileAsChatId) {
-        BufferedImage bufferedImage = readImageFromFile(nameFileAsChatId);
+        BufferedImage bufferedImage = fileService.readImageFromFile(nameFileAsChatId);
 
         Graphics graphics = bufferedImage.createGraphics();
         Color color = new Color(bufferedImage.getRGB(0, 0));
@@ -98,20 +83,20 @@ public class Palette {
         HSLColor hslColor = new HSLColor(color);
         color = hslColor.adjustHue(hslColor.getHue() + 120);
 
-        drawRectangle200x100(graphics,color,200);
-        drawTextOnGraphics(graphics,color,200);
+        drawRectangle200x100(graphics, color, 200);
+        drawTextOnGraphics(graphics, color, 200);
 
         color = hslColor.adjustHue(hslColor.getHue() + 240);
 
-        drawRectangle200x100(graphics,color,400);
-        drawTextOnGraphics(graphics,color,400);
+        drawRectangle200x100(graphics, color, 400);
+        drawTextOnGraphics(graphics, color, 400);
         graphics.dispose();
 
-        saveImageToFile(bufferedImage, nameFileAsChatId);
+        fileService.saveImageToFile(bufferedImage, nameFileAsChatId);
     }
 
     public void applyTetradicMode(String nameFileAsChatId) {
-        BufferedImage bufferedImage = readImageFromFile(nameFileAsChatId);
+        BufferedImage bufferedImage = fileService.readImageFromFile(nameFileAsChatId);
 
         Graphics graphics = bufferedImage.createGraphics();
         Color color = new Color(bufferedImage.getRGB(0, 0));
@@ -121,25 +106,25 @@ public class Palette {
         HSLColor hslColor = new HSLColor(color);
         color = hslColor.adjustHue(hslColor.getHue() + 90);
 
-        drawRectangle150x100(graphics,color,150);
-        drawTextOnGraphics(graphics,color,150);
+        drawRectangle150x100(graphics, color, 150);
+        drawTextOnGraphics(graphics, color, 150);
 
         color = hslColor.adjustHue(hslColor.getHue() + 180);
 
-        drawRectangle150x100(graphics,color,300);
-        drawTextOnGraphics(graphics,color,300);
+        drawRectangle150x100(graphics, color, 300);
+        drawTextOnGraphics(graphics, color, 300);
 
         color = hslColor.adjustHue(hslColor.getHue() + 270);
 
-        drawRectangle150x100(graphics,color,450);
-        drawTextOnGraphics(graphics,color,450);
+        drawRectangle150x100(graphics, color, 450);
+        drawTextOnGraphics(graphics, color, 450);
         graphics.dispose();
 
-        saveImageToFile(bufferedImage, nameFileAsChatId);
+        fileService.saveImageToFile(bufferedImage, nameFileAsChatId);
     }
 
     public void applyMonochromaticMode(String nameFileAsChatId) {
-        BufferedImage bufferedImage = readImageFromFile(nameFileAsChatId);
+        BufferedImage bufferedImage = fileService.readImageFromFile(nameFileAsChatId);
 
         Graphics graphics = bufferedImage.createGraphics();
         Color color = new Color(bufferedImage.getRGB(0, 0));
@@ -150,21 +135,21 @@ public class Palette {
         float luminance = hslColor.getLuminance();
         color = hslColor.adjustLuminance(luminance * 1.10f);
 
-        drawRectangle150x100(graphics,color,150);
-        drawTextOnGraphics(graphics,color,150);
+        drawRectangle150x100(graphics, color, 150);
+        drawTextOnGraphics(graphics, color, 150);
 
         color = hslColor.adjustLuminance(luminance * 1.20f);
 
-        drawRectangle150x100(graphics,color,300);
-        drawTextOnGraphics(graphics,color,300);
+        drawRectangle150x100(graphics, color, 300);
+        drawTextOnGraphics(graphics, color, 300);
 
         color = hslColor.adjustLuminance(luminance * 1.30f);
 
-        drawRectangle150x100(graphics,color,450);
-        drawTextOnGraphics(graphics,color,450);
+        drawRectangle150x100(graphics, color, 450);
+        drawTextOnGraphics(graphics, color, 450);
         graphics.dispose();
 
-        saveImageToFile(bufferedImage, nameFileAsChatId);
+        fileService.saveImageToFile(bufferedImage, nameFileAsChatId);
     }
 
 
@@ -184,19 +169,21 @@ public class Palette {
         graphics.setColor(color);
         graphics.fillRect(xPoint, 0, 300, 100);
     }
+
     private void drawRectangle200x100(Graphics graphics, Color color, int xPoint) {
         graphics.setColor(color);
         graphics.fillRect(xPoint, 0, 200, 100);
     }
+
     private void drawRectangle150x100(Graphics graphics, Color color, int xPoint) {
         graphics.setColor(color);
         graphics.fillRect(xPoint, 0, 150, 100);
     }
 
     private void drawTextOnGraphics(Graphics graphics, Color color, int xPoint) {
-        graphics.setFont(graphics.getFont().deriveFont(30f));
+        graphics.setFont(graphics.getFont().deriveFont(25f));
         String hex = "#" + Integer.toHexString(color.getRGB()).substring(2);
         graphics.setColor(Color.BLACK);
-        graphics.drawString(hex, xPoint, 50);
+        graphics.drawString(hex, xPoint + 10, 90);
     }
 }
