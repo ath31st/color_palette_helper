@@ -11,6 +11,9 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 public class TelegramBot extends TelegramLongPollingBot {
     private String BOT_NAME;
     private String BOT_TOKEN;
+
+    @Autowired
+    private Palette palette;
     @Autowired
     private SendMessageService service;
 
@@ -27,21 +30,29 @@ public class TelegramBot extends TelegramLongPollingBot {
     @Override
     public void onUpdateReceived(Update update) {
         if (update.hasMessage() && update.getMessage().hasText()) {
+            String chatId = String.valueOf(update.getMessage().getChatId());
+            String inputText = update.getMessage().getText();
+            // todo would make check on valid hexcode in inputText
+
             try {
-                // create file with config hexcode!
-                // after that - menu
-                execute(service.createMenuMessage(update));
+                palette.createPalette(inputText);
+
+                execute(service.createPhotoMessage(chatId));
+                execute(service.createMessage(chatId, palette.toString()));
+                execute(service.createMenuMessage(chatId));
             } catch (TelegramApiException e) {
                 throw new RuntimeException(e);
             }
         }
         if (update.hasCallbackQuery()) {
+            String chatId = String.valueOf(update.getCallbackQuery().getMessage().getChatId());
             String callBachDate = update.getCallbackQuery().getData();
             switch (callBachDate) {
                 case "COMPLEMENTARY":
+                    palette.applyComplementaryMode();
                     try {
-                        execute(service.createPhotoMessage(update));
-                        execute(service.createMessage(update));
+                        execute(service.createPhotoMessage(chatId));
+                        execute(service.createMenuMessage(chatId));
                     } catch (TelegramApiException e) {
                         throw new RuntimeException(e);
                     }
