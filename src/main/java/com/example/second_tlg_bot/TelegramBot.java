@@ -35,8 +35,7 @@ public class TelegramBot extends TelegramLongPollingBot {
             // todo would make check on valid hexcode in inputText
 
             try {
-                palette.setHexCode(inputText);
-                palette.createPalette();
+                palette.createPalette(chatId,inputText);
 
                 execute(service.createPhotoMessage(chatId));
                 execute(service.createMessage(chatId, palette.toString()));
@@ -50,7 +49,8 @@ public class TelegramBot extends TelegramLongPollingBot {
             String callBachDate = update.getCallbackQuery().getData();
             switch (callBachDate) {
                 case "complementary":
-                    palette.applyComplementaryMode();
+                  //  palette. // retrieve file and work with him
+                    palette.applyComplementaryMode(chatId);
                     try {
                         execute(service.createPhotoMessage(chatId));
                         execute(service.createMenuMessage(chatId));
@@ -59,7 +59,7 @@ public class TelegramBot extends TelegramLongPollingBot {
                     }
                     break;
                 case "monochromatic":
-                    palette.applyMonochromaticMode();
+                    palette.applyMonochromaticMode(chatId);
                     try {
                         execute(service.createPhotoMessage(chatId));
                         execute(service.createMenuMessage(chatId));
@@ -68,7 +68,7 @@ public class TelegramBot extends TelegramLongPollingBot {
                     }
                     break;
                 case "analogous":
-                    palette.applyAnalogousMode();
+                    palette.applyAnalogousMode(chatId);
                     try {
                         execute(service.createPhotoMessage(chatId));
                         execute(service.createMenuMessage(chatId));
@@ -77,7 +77,7 @@ public class TelegramBot extends TelegramLongPollingBot {
                     }
                     break;
                 case "triadic":
-                    palette.applyTriadicMode();
+                    palette.applyTriadicMode(chatId);
                     try {
                         execute(service.createPhotoMessage(chatId));
                         execute(service.createMenuMessage(chatId));
@@ -86,7 +86,7 @@ public class TelegramBot extends TelegramLongPollingBot {
                     }
                     break;
                 case "tetradic":
-                    palette.applyTetradicMode();
+                    palette.applyTetradicMode(chatId);
                     try {
                         execute(service.createPhotoMessage(chatId));
                         execute(service.createMenuMessage(chatId));

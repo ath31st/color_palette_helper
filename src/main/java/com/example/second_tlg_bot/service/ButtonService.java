@@ -14,7 +14,7 @@ public class ButtonService {
         List<InlineKeyboardButton> inlineKeyboardButtonsRow1 = new ArrayList<>();
         List<InlineKeyboardButton> inlineKeyboardButtonsRow2 = new ArrayList<>();
         InlineKeyboardButton inlineKeyboardButton1 = new InlineKeyboardButton();
-        inlineKeyboardButton1.setText("omplementary");
+        inlineKeyboardButton1.setText("complementary");
         inlineKeyboardButton1.setCallbackData("complementary");
 
         InlineKeyboardButton inlineKeyboardButton2 = new InlineKeyboardButton();

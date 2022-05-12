@@ -56,7 +56,7 @@ public class SendMessageService {
     public SendPhoto createPhotoMessage(String chatId) {
         SendPhoto sendPhoto = new SendPhoto();
         sendPhoto.setChatId(chatId);
-        sendPhoto.setPhoto(new InputFile(new File("src/main/resources/tmp1.jpg"), "tmp1"));
+        sendPhoto.setPhoto(new InputFile(new File("src/main/resources/images/" + chatId + ".jpg"), chatId));
         return sendPhoto;
     }
 }
