@@ -15,6 +15,8 @@ import java.io.File;
 public class SendMessageService {
     @Autowired
     private ButtonService buttonService;
+    @Autowired
+    private FileService fileService;
 
     public SendMessage createMenuMessage(String chatId) {
         SendMessage sendMessage = new SendMessage();
@@ -34,15 +36,6 @@ public class SendMessageService {
         editMessageText.setText(editMessage);
         return editMessageText;
     }
-//    public EditMessageMedia createEditMediaMessage(Update update) {
-//        EditMessageMedia editMessageMedia = new EditMessageMedia();
-//        Integer messageId = update.getCallbackQuery().getMessage().getMessageId();
-//        String chatId = String.valueOf(update.getCallbackQuery().getMessage().getChatId());
-//        editMessageMedia.setChatId(chatId);
-//        editMessageMedia.setMessageId(messageId);
-//        editMessageMedia.setMedia(new InputMediaPhoto().setMedia());
-//        return editMessageMedia;
-//    }
 
     public SendMessage createMessage(String chatId, String message) {
         SendMessage sendMessage = new SendMessage();
@@ -56,7 +49,8 @@ public class SendMessageService {
     public SendPhoto createPhotoMessage(String chatId) {
         SendPhoto sendPhoto = new SendPhoto();
         sendPhoto.setChatId(chatId);
-        sendPhoto.setPhoto(new InputFile(new File("src/main/resources/images/" + chatId + ".jpg"), chatId));
+        sendPhoto.setPhoto(new InputFile(new File(fileService.PATH_IMAGES_DIRECTORY
+                + chatId + fileService.FORMAT_FILE), chatId));
         return sendPhoto;
     }
 }

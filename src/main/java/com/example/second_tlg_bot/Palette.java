@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 @Getter
@@ -21,6 +23,7 @@ public class Palette {
     private HSLColor hslColor;
     private BufferedImage bufferedImage;
     private final FileService fileService;
+    private final List<String> hexCodes = new ArrayList<>();
 
     public void createPalette(String nameFileAsChatId, String hexCode) {
         bufferedImage = new BufferedImage(600, 100, BufferedImage.TYPE_INT_RGB);
@@ -157,10 +160,13 @@ public class Palette {
     }
 
     private void drawTextOnGraphics(int xPoint) {
-        graphics.setFont(graphics.getFont().deriveFont(25f));
-        String hex = "#" + Integer.toHexString(color.getRGB()).substring(2);
+      //  graphics.setFont(graphics.getFont().deriveFont(25f));
+        graphics.setFont(new Font("TimesRoman", Font.PLAIN, 23));
+        String hex = "#" + Integer.toHexString(color.getRGB()).substring(2).toUpperCase();
         graphics.setColor(Color.BLACK);
         graphics.drawString(hex, xPoint + 10, 90);
+
+        hexCodes.add(hex);
     }
 
     private void initImageForEditing(String nameFileAsChatId) {
@@ -170,5 +176,15 @@ public class Palette {
         color = new Color(bufferedImage.getRGB(0, 0));
         drawRectangle600x100();
         drawTextOnGraphics(0);
+    }
+    public String showResultHexCodes() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (String s : hexCodes) {
+            stringBuilder
+                    .append(s)
+                    .append(" ");
+        }
+        hexCodes.clear();
+        return stringBuilder.toString();
     }
 }

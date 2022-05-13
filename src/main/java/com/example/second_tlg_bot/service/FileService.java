@@ -20,13 +20,13 @@ import java.util.stream.Stream;
 @RequiredArgsConstructor
 public class FileService {
     private final int LIMIT_FILES_IN_DIRECTORY = 10;
-    private final String FORMAT_FILE = ".jpg";
-    private final String PATH_IMAGES_DIRECTORY = "src/main/resources/images/";
+    public final String FORMAT_FILE = ".png";
+    public final String PATH_IMAGES_DIRECTORY = "src/main/resources/images/";
     private final TreeMap<Long, String> tableImages;
 
     public void saveImageToFile(BufferedImage bufferedImage, String fileName) {
         try {
-            ImageIO.write(bufferedImage, "jpg", new File(PATH_IMAGES_DIRECTORY + fileName + FORMAT_FILE));
+            ImageIO.write(bufferedImage, "png", new File(PATH_IMAGES_DIRECTORY + fileName + FORMAT_FILE));
         } catch (Exception e) {
             e.printStackTrace();
         }

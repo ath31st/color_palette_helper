@@ -42,7 +42,7 @@ public class TelegramBot extends TelegramLongPollingBot {
                     palette.createPalette(chatId, inputText);
 
                     execute(service.createPhotoMessage(chatId));
-                    execute(service.createMessage(chatId, palette.toString()));
+                    execute(service.createMessage(chatId, palette.showResultHexCodes()));
                     execute(service.createMenuMessage(chatId));
                 } catch (TelegramApiException e) {
                     throw new RuntimeException(e);
@@ -87,6 +87,7 @@ public class TelegramBot extends TelegramLongPollingBot {
         try {
             execute(service.createPhotoMessage(chatId));
             execute(service.createMenuMessage(chatId));
+            execute(service.createMessage(chatId,palette.showResultHexCodes()));
         } catch (TelegramApiException e) {
             throw new RuntimeException(e);
         }
