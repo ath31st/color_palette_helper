@@ -5,7 +5,6 @@ import com.example.second_tlg_bot.util.HSLColor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 
@@ -21,16 +20,15 @@ public class Palette {
     private Graphics graphics;
     private HSLColor hslColor;
     private BufferedImage bufferedImage;
-    @Autowired
     private final FileService fileService;
 
     public void createPalette(String nameFileAsChatId, String hexCode) {
         bufferedImage = new BufferedImage(600, 100, BufferedImage.TYPE_INT_RGB);
-        Graphics graphics = bufferedImage.createGraphics();
-        Color color = hexToRgb(hexCode);
+        graphics = bufferedImage.createGraphics();
+        color = hexToRgb(hexCode);
 
-        drawRectangle600x100(graphics, color);
-        drawTextOnGraphics(graphics, color, 0);
+        drawRectangle600x100();
+        drawTextOnGraphics(0);
         fileService.saveImageToFile(bufferedImage, nameFileAsChatId);
     }
 
@@ -40,8 +38,8 @@ public class Palette {
         hslColor = new HSLColor(color);
         color = hslColor.getComplementary();
 
-        drawRectangle300x100(graphics, color, 300);
-        drawTextOnGraphics(graphics, color, 300);
+        drawRectangle300x100(300);
+        drawTextOnGraphics(300);
 
         graphics.dispose();
         fileService.saveImageToFile(bufferedImage, nameFileAsChatId);
@@ -53,13 +51,13 @@ public class Palette {
         hslColor = new HSLColor(color);
         color = hslColor.adjustHue(hslColor.getHue() + 30);
 
-        drawRectangle200x100(graphics, color, 200);
-        drawTextOnGraphics(graphics, color, 200);
+        drawRectangle200x100(200);
+        drawTextOnGraphics(200);
 
         color = hslColor.adjustHue(hslColor.getHue() + 330);
 
-        drawRectangle200x100(graphics, color, 400);
-        drawTextOnGraphics(graphics, color, 400);
+        drawRectangle200x100(400);
+        drawTextOnGraphics(400);
         graphics.dispose();
 
         fileService.saveImageToFile(bufferedImage, nameFileAsChatId);
@@ -71,13 +69,13 @@ public class Palette {
         hslColor = new HSLColor(color);
         color = hslColor.adjustHue(hslColor.getHue() + 120);
 
-        drawRectangle200x100(graphics, color, 200);
-        drawTextOnGraphics(graphics, color, 200);
+        drawRectangle200x100(200);
+        drawTextOnGraphics(200);
 
         color = hslColor.adjustHue(hslColor.getHue() + 240);
 
-        drawRectangle200x100(graphics, color, 400);
-        drawTextOnGraphics(graphics, color, 400);
+        drawRectangle200x100(400);
+        drawTextOnGraphics(400);
         graphics.dispose();
 
         fileService.saveImageToFile(bufferedImage, nameFileAsChatId);
@@ -89,18 +87,18 @@ public class Palette {
         hslColor = new HSLColor(color);
         color = hslColor.adjustHue(hslColor.getHue() + 90);
 
-        drawRectangle150x100(graphics, color, 150);
-        drawTextOnGraphics(graphics, color, 150);
+        drawRectangle150x100(150);
+        drawTextOnGraphics(150);
 
         color = hslColor.adjustHue(hslColor.getHue() + 180);
 
-        drawRectangle150x100(graphics, color, 300);
-        drawTextOnGraphics(graphics, color, 300);
+        drawRectangle150x100(300);
+        drawTextOnGraphics(300);
 
         color = hslColor.adjustHue(hslColor.getHue() + 270);
 
-        drawRectangle150x100(graphics, color, 450);
-        drawTextOnGraphics(graphics, color, 450);
+        drawRectangle150x100(450);
+        drawTextOnGraphics(450);
         graphics.dispose();
 
         fileService.saveImageToFile(bufferedImage, nameFileAsChatId);
@@ -113,18 +111,18 @@ public class Palette {
         float luminance = hslColor.getLuminance();
         color = hslColor.adjustLuminance(luminance * 1.10f);
 
-        drawRectangle150x100(graphics, color, 150);
-        drawTextOnGraphics(graphics, color, 150);
+        drawRectangle150x100(150);
+        drawTextOnGraphics(150);
 
         color = hslColor.adjustLuminance(luminance * 1.20f);
 
-        drawRectangle150x100(graphics, color, 300);
-        drawTextOnGraphics(graphics, color, 300);
+        drawRectangle150x100(300);
+        drawTextOnGraphics(300);
 
         color = hslColor.adjustLuminance(luminance * 1.30f);
 
-        drawRectangle150x100(graphics, color, 450);
-        drawTextOnGraphics(graphics, color, 450);
+        drawRectangle150x100(450);
+        drawTextOnGraphics(450);
         graphics.dispose();
 
         fileService.saveImageToFile(bufferedImage, nameFileAsChatId);
@@ -138,27 +136,27 @@ public class Palette {
                 Integer.valueOf(colorStr.substring(5, 7), 16));
     }
 
-    private void drawRectangle600x100(Graphics graphics, Color color) {
+    private void drawRectangle600x100() {
         graphics.setColor(color);
         graphics.fillRect(0, 0, 600, 100);
     }
 
-    private void drawRectangle300x100(Graphics graphics, Color color, int xPoint) {
+    private void drawRectangle300x100(int xPoint) {
         graphics.setColor(color);
         graphics.fillRect(xPoint, 0, 300, 100);
     }
 
-    private void drawRectangle200x100(Graphics graphics, Color color, int xPoint) {
+    private void drawRectangle200x100(int xPoint) {
         graphics.setColor(color);
         graphics.fillRect(xPoint, 0, 200, 100);
     }
 
-    private void drawRectangle150x100(Graphics graphics, Color color, int xPoint) {
+    private void drawRectangle150x100(int xPoint) {
         graphics.setColor(color);
         graphics.fillRect(xPoint, 0, 150, 100);
     }
 
-    private void drawTextOnGraphics(Graphics graphics, Color color, int xPoint) {
+    private void drawTextOnGraphics(int xPoint) {
         graphics.setFont(graphics.getFont().deriveFont(25f));
         String hex = "#" + Integer.toHexString(color.getRGB()).substring(2);
         graphics.setColor(Color.BLACK);
@@ -170,7 +168,7 @@ public class Palette {
 
         graphics = bufferedImage.createGraphics();
         color = new Color(bufferedImage.getRGB(0, 0));
-        drawRectangle600x100(graphics, color);
-        drawTextOnGraphics(graphics, color, 0);
+        drawRectangle600x100();
+        drawTextOnGraphics(0);
     }
 }
