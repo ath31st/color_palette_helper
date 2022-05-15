@@ -38,7 +38,7 @@ public class TelegramBot extends TelegramLongPollingBot {
         if (update.hasMessage() && update.getMessage().hasText()) {
             String chatId = String.valueOf(update.getMessage().getChatId());
             String inputText = update.getMessage().getText();
-            if (inputText.matches("^#(?:[0-9a-fA-F]{3}){1,2}$")) {
+            if (inputText.matches("^#(?:[\\da-fA-F]{3}){1,2}$")) {
                 try {
                     fileService.deleteOldFilesFromImagesDirectory();
 
@@ -62,26 +62,26 @@ public class TelegramBot extends TelegramLongPollingBot {
             String chatId = String.valueOf(update.getCallbackQuery().getMessage().getChatId());
             String callBachDate = update.getCallbackQuery().getData();
             switch (callBachDate) {
-                case "complementary":
+                case "complementary" -> {
                     palette.applyComplementaryMode(chatId);
                     executeCommands(chatId);
-                    break;
-                case "monochromatic":
+                }
+                case "monochromatic" -> {
                     palette.applyMonochromaticMode(chatId);
                     executeCommands(chatId);
-                    break;
-                case "analogous":
+                }
+                case "analogous" -> {
                     palette.applyAnalogousMode(chatId);
                     executeCommands(chatId);
-                    break;
-                case "triadic":
+                }
+                case "triadic" -> {
                     palette.applyTriadicMode(chatId);
                     executeCommands(chatId);
-                    break;
-                case "tetradic":
+                }
+                case "tetradic" -> {
                     palette.applyTetradicMode(chatId);
                     executeCommands(chatId);
-                    break;
+                }
             }
         }
     }
