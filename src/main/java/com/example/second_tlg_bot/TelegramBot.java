@@ -1,25 +1,28 @@
 package com.example.second_tlg_bot;
 
+import com.example.second_tlg_bot.service.ButtonService;
 import com.example.second_tlg_bot.service.FileService;
 import com.example.second_tlg_bot.service.SendMessageService;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
+import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
+@Getter
 @Setter
+@RequiredArgsConstructor
 public class TelegramBot extends TelegramLongPollingBot {
-    private String BOT_NAME;
-    private String BOT_TOKEN;
+    private final int RECONNECT_PAUSE = 10000;
+    private final String BOT_NAME;
+    private final String BOT_TOKEN;
 
-    @Autowired
-    private Palette palette;
-    @Autowired
-    private SendMessageService service;
-    @Autowired
-    private FileService fileService;
-
+    private FileService fileService = new FileService();
+    private Palette palette = new Palette(fileService);
+    private SendMessageService service = new SendMessageService(new ButtonService(),fileService);
     @Override
     public String getBotUsername() {
         return BOT_NAME;
@@ -87,9 +90,24 @@ public class TelegramBot extends TelegramLongPollingBot {
         try {
             execute(service.createPhotoMessage(chatId));
             execute(service.createMenuMessage(chatId));
-            execute(service.createMessage(chatId,palette.showResultHexCodes()));
+            execute(service.createMessage(chatId, palette.showResultHexCodes()));
         } catch (TelegramApiException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    public void botConnect() {
+        try {
+            TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
+            telegramBotsApi.registerBot(this);
+        } catch (TelegramApiException e) {
+            try {
+                Thread.sleep(RECONNECT_PAUSE);
+            } catch (InterruptedException e1) {
+                e1.printStackTrace();
+                return;
+            }
+            botConnect();
         }
     }
 }

@@ -1,11 +1,9 @@
 package com.example.second_tlg_bot;
 
 import com.example.second_tlg_bot.service.FileService;
-import com.example.second_tlg_bot.util.HSLColor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import org.springframework.stereotype.Component;
 
 
 import java.awt.*;
@@ -13,7 +11,6 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
 @Getter
 @Setter
 @RequiredArgsConstructor
@@ -109,7 +106,7 @@ public class Palette {
 
     public void applyMonochromaticMode(String nameFileAsChatId) {
         initImageForEditing(nameFileAsChatId);
-
+        //todo fix problem with luminance (out of range)
         hslColor = new HSLColor(color);
         float luminance = hslColor.getLuminance();
         color = hslColor.adjustLuminance(luminance * 1.10f);

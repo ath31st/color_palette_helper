@@ -1,4 +1,4 @@
-package com.example.second_tlg_bot.util;
+package com.example.second_tlg_bot;
 
 import java.awt.Color;
 

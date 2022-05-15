@@ -1,8 +1,6 @@
 package com.example.second_tlg_bot.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -16,13 +14,12 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-@Component
 @RequiredArgsConstructor
 public class FileService {
     private final int LIMIT_FILES_IN_DIRECTORY = 10;
     public final String FORMAT_FILE = ".png";
     public final String PATH_IMAGES_DIRECTORY = "src/main/resources/images/";
-    private final TreeMap<Long, String> tableImages;
+    private final TreeMap<Long, String> tableImages = new TreeMap<>();
 
     public void saveImageToFile(BufferedImage bufferedImage, String fileName) {
         try {

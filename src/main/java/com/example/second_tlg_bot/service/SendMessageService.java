@@ -1,7 +1,9 @@
 package com.example.second_tlg_bot.service;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.jvnet.hk2.annotations.Service;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
@@ -11,12 +13,12 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 
 import java.io.File;
 
-@Service
+@Getter
+@Setter
+@RequiredArgsConstructor
 public class SendMessageService {
-    @Autowired
-    private ButtonService buttonService;
-    @Autowired
-    private FileService fileService;
+    private final ButtonService buttonService;
+    private final FileService fileService;
 
     public SendMessage createMenuMessage(String chatId) {
         SendMessage sendMessage = new SendMessage();
