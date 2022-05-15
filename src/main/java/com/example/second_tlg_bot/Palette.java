@@ -29,18 +29,18 @@ public class Palette {
         graphics = bufferedImage.createGraphics();
         color = hexToRgb(hexCode);
 
-        drawRectangle300x100(0);
+        drawRectangle(0);
         drawTextOnGraphics(0);
         fileService.saveImageToFile(bufferedImage, nameFileAsChatId);
     }
 
     public void applyComplementaryMode(String nameFileAsChatId) {
-        initImageForEditing(nameFileAsChatId,2);
+        initImageForEditing(nameFileAsChatId, 2);
 
         hslColor = new HSLColor(color);
         color = hslColor.getComplementary();
 
-        drawRectangle300x100(100);
+        drawRectangle(100);
         drawTextOnGraphics(100);
 
         graphics.dispose();
@@ -48,17 +48,17 @@ public class Palette {
     }
 
     public void applyAnalogousMode(String nameFileAsChatId) {
-        initImageForEditing(nameFileAsChatId,3);
+        initImageForEditing(nameFileAsChatId, 3);
 
         hslColor = new HSLColor(color);
         color = hslColor.adjustHue(hslColor.getHue() + 30);
 
-        drawRectangle300x100(100);
+        drawRectangle(100);
         drawTextOnGraphics(100);
 
         color = hslColor.adjustHue(hslColor.getHue() + 330);
 
-        drawRectangle300x100(200);
+        drawRectangle(200);
         drawTextOnGraphics(200);
         graphics.dispose();
 
@@ -66,17 +66,17 @@ public class Palette {
     }
 
     public void applyTriadicMode(String nameFileAsChatId) {
-        initImageForEditing(nameFileAsChatId,3);
+        initImageForEditing(nameFileAsChatId, 3);
 
         hslColor = new HSLColor(color);
         color = hslColor.adjustHue(hslColor.getHue() + 120);
 
-        drawRectangle300x100(100);
+        drawRectangle(100);
         drawTextOnGraphics(100);
 
         color = hslColor.adjustHue(hslColor.getHue() + 240);
 
-        drawRectangle300x100(200);
+        drawRectangle(200);
         drawTextOnGraphics(200);
         graphics.dispose();
 
@@ -84,22 +84,22 @@ public class Palette {
     }
 
     public void applyTetradicMode(String nameFileAsChatId) {
-        initImageForEditing(nameFileAsChatId,4);
+        initImageForEditing(nameFileAsChatId, 4);
 
         hslColor = new HSLColor(color);
         color = hslColor.adjustHue(hslColor.getHue() + 90);
 
-        drawRectangle300x100(100);
+        drawRectangle(100);
         drawTextOnGraphics(100);
 
         color = hslColor.adjustHue(hslColor.getHue() + 180);
 
-        drawRectangle300x100(200);
+        drawRectangle(200);
         drawTextOnGraphics(200);
 
         color = hslColor.adjustHue(hslColor.getHue() + 270);
 
-        drawRectangle300x100(300);
+        drawRectangle(300);
         drawTextOnGraphics(300);
         graphics.dispose();
 
@@ -107,25 +107,28 @@ public class Palette {
     }
 
     public void applyMonochromaticMode(String nameFileAsChatId) {
-        initImageForEditing(nameFileAsChatId,4);
+        initImageForEditing(nameFileAsChatId, 4);
 
         //todo fix problem with luminance (out of range)
 
         hslColor = new HSLColor(color);
         float luminance = hslColor.getLuminance();
-        color = hslColor.adjustLuminance(luminance * 1.10f);
+        if (luminance < 90)
+            color = hslColor.adjustLuminance(luminance * 1.10f);
 
-        drawRectangle300x100(100);
+        drawRectangle(100);
         drawTextOnGraphics(100);
 
-        color = hslColor.adjustLuminance(luminance * 1.20f);
+        if (luminance < 80)
+            color = hslColor.adjustLuminance(luminance * 1.20f);
 
-        drawRectangle300x100(200);
+        drawRectangle(200);
         drawTextOnGraphics(200);
 
-        color = hslColor.adjustLuminance(luminance * 1.30f);
+        if (luminance < 70)
+            color = hslColor.adjustLuminance(luminance * 1.30f);
 
-        drawRectangle300x100(300);
+        drawRectangle(300);
         drawTextOnGraphics(300);
         graphics.dispose();
 
@@ -140,17 +143,19 @@ public class Palette {
                 Integer.valueOf(colorStr.substring(5, 7), 16));
     }
 
-    private void drawRectangle300x100(int yPoint) {
+    private void drawRectangle(int yPoint) {
         graphics.setColor(color);
-        graphics.fillRect(0, yPoint, 300, 100);
+        graphics.fillRect(0, yPoint, WIDTH, HEIGHT);
     }
 
     private void drawTextOnGraphics(int yPoint) {
-        //  graphics.setFont(graphics.getFont().deriveFont(25f));
-        graphics.setFont(new Font("TimesRoman", Font.PLAIN, 20));
+        ColorUtils colorUtils = new ColorUtils();
+
+        graphics.setFont(new Font("TimesRoman", Font.PLAIN, 16));
+        String colorName = colorUtils.getColorNameFromColor(color);
         String hex = "#" + Integer.toHexString(color.getRGB()).substring(2).toUpperCase();
         graphics.setColor(Color.BLACK);
-        graphics.drawString(hex, 5, yPoint + 90);
+        graphics.drawString(hex + " " + colorName, 5, yPoint + 90);
 
         hexCodes.add(hex);
     }
@@ -161,7 +166,7 @@ public class Palette {
 
         bufferedImage = new BufferedImage(WIDTH, HEIGHT * multiplier, BufferedImage.TYPE_INT_RGB);
         graphics = bufferedImage.createGraphics();
-        drawRectangle300x100(0);
+        drawRectangle(0);
         drawTextOnGraphics(0);
     }
 

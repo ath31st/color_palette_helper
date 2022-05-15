@@ -18,7 +18,7 @@ import java.util.stream.Stream;
 public class FileService {
     private final int LIMIT_FILES_IN_DIRECTORY = 10;
     public final String FORMAT_FILE = ".png";
-    public final String PATH_IMAGES_DIRECTORY = "src/main/resources/images/";
+    public final String PATH_IMAGES_DIRECTORY = "src/main/images/";
     private final TreeMap<Long, String> tableImages = new TreeMap<>();
 
     public void saveImageToFile(BufferedImage bufferedImage, String fileName) {
