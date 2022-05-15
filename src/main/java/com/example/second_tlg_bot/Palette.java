@@ -109,8 +109,6 @@ public class Palette {
     public void applyMonochromaticMode(String nameFileAsChatId) {
         initImageForEditing(nameFileAsChatId, 4);
 
-        //todo fix problem with luminance (out of range)
-
         hslColor = new HSLColor(color);
         float luminance = hslColor.getLuminance();
         if (luminance < 90)

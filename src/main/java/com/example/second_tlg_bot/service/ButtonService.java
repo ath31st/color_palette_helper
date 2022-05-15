@@ -6,30 +6,32 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.second_tlg_bot.Constants.*;
+
 public class ButtonService {
     public List<List<InlineKeyboardButton>> createInlineButton() {
         List<List<InlineKeyboardButton>> inlineKeyButtonList = new ArrayList<>();
         List<InlineKeyboardButton> inlineKeyboardButtonsRow1 = new ArrayList<>();
         List<InlineKeyboardButton> inlineKeyboardButtonsRow2 = new ArrayList<>();
         InlineKeyboardButton inlineKeyboardButton1 = new InlineKeyboardButton();
-        inlineKeyboardButton1.setText("\u29DF complementary");
-        inlineKeyboardButton1.setCallbackData("complementary");
+        inlineKeyboardButton1.setText("\u29DF " + COMPLEMENTARY);
+        inlineKeyboardButton1.setCallbackData(COMPLEMENTARY);
 
         InlineKeyboardButton inlineKeyboardButton2 = new InlineKeyboardButton();
-        inlineKeyboardButton2.setText("\u25ce monochromatic");
-        inlineKeyboardButton2.setCallbackData("monochromatic");
+        inlineKeyboardButton2.setText("\u25ce " + MONOCHROMATIC);
+        inlineKeyboardButton2.setCallbackData(MONOCHROMATIC);
 
         InlineKeyboardButton inlineKeyboardButton3 = new InlineKeyboardButton();
-        inlineKeyboardButton3.setText("\u25e1 analogous");
-        inlineKeyboardButton3.setCallbackData("analogous");
+        inlineKeyboardButton3.setText("\u25e1 " + ANALOGOUS);
+        inlineKeyboardButton3.setCallbackData(ANALOGOUS);
 
         InlineKeyboardButton inlineKeyboardButton4 = new InlineKeyboardButton();
-        inlineKeyboardButton4.setText("\u25b3 triadic");
-        inlineKeyboardButton4.setCallbackData("triadic");
+        inlineKeyboardButton4.setText("\u25b3 " + TRIADIC);
+        inlineKeyboardButton4.setCallbackData(TRIADIC);
 
         InlineKeyboardButton inlineKeyboardButton5 = new InlineKeyboardButton();
-        inlineKeyboardButton5.setText("\u25a2 tetradic");
-        inlineKeyboardButton5.setCallbackData("tetradic");
+        inlineKeyboardButton5.setText("\u25a2 " + TETRADIC);
+        inlineKeyboardButton5.setCallbackData(TETRADIC);
 
         inlineKeyboardButtonsRow1.add(inlineKeyboardButton1);
         inlineKeyboardButtonsRow1.add(inlineKeyboardButton2);

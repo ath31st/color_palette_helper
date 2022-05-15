@@ -3,8 +3,6 @@ package com.example.second_tlg_bot.service;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import org.jvnet.hk2.annotations.Service;
-import org.telegram.telegrambots.meta.api.methods.send.SendDocument;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
@@ -13,6 +11,8 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 
 import java.io.File;
+
+import static com.example.second_tlg_bot.Constants.MENU;
 
 @Getter
 @Setter
@@ -24,7 +24,7 @@ public class SendMessageService {
     public SendMessage createMenuMessage(String chatId) {
         SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(chatId);
-        sendMessage.setText("Choose the type of color combination");
+        sendMessage.setText(MENU);
         InlineKeyboardMarkup inlineKeyboardMarkup = buttonService.setInlineKeyMarkup(buttonService.createInlineButton());
         sendMessage.setReplyMarkup(inlineKeyboardMarkup);
         return sendMessage;
