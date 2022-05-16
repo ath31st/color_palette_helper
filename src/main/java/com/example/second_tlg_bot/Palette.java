@@ -1,14 +1,19 @@
 package com.example.second_tlg_bot;
 
-import com.example.second_tlg_bot.service.FileService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Getter
@@ -20,22 +25,22 @@ public class Palette {
     private Color color;
     private Graphics graphics;
     private HSLColor hslColor;
-    private BufferedImage bufferedImage;
-    private final FileService fileService;
+    public BufferedImage bufferedImage;
     private final List<String> hexCodes = new ArrayList<>();
+    private final HashMap<String, String> usersHexCodes = new HashMap<>();
 
-    public void createPalette(String nameFileAsChatId, String hexCode) {
+    public void createPalette(String chatId, String hexCode) {
+        usersHexCodes.put(chatId, hexCode);
         bufferedImage = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
         graphics = bufferedImage.createGraphics();
         color = hexToRgb(hexCode);
 
         drawRectangle(0);
         drawTextOnGraphics(0);
-        fileService.saveImageToFile(bufferedImage, nameFileAsChatId);
     }
 
-    public void applyComplementaryMode(String nameFileAsChatId) {
-        initImageForEditing(nameFileAsChatId, 2);
+    public void applyComplementaryMode(String chatId) {
+        initImageForEditing(chatId, 2);
 
         hslColor = new HSLColor(color);
         color = hslColor.getComplementary();
@@ -44,11 +49,10 @@ public class Palette {
         drawTextOnGraphics(100);
 
         graphics.dispose();
-        fileService.saveImageToFile(bufferedImage, nameFileAsChatId);
     }
 
-    public void applyAnalogousMode(String nameFileAsChatId) {
-        initImageForEditing(nameFileAsChatId, 3);
+    public void applyAnalogousMode(String chatId) {
+        initImageForEditing(chatId, 3);
 
         hslColor = new HSLColor(color);
         color = hslColor.adjustHue(hslColor.getHue() + 30);
@@ -61,12 +65,10 @@ public class Palette {
         drawRectangle(200);
         drawTextOnGraphics(200);
         graphics.dispose();
-
-        fileService.saveImageToFile(bufferedImage, nameFileAsChatId);
     }
 
-    public void applyTriadicMode(String nameFileAsChatId) {
-        initImageForEditing(nameFileAsChatId, 3);
+    public void applyTriadicMode(String chatId) {
+        initImageForEditing(chatId, 3);
 
         hslColor = new HSLColor(color);
         color = hslColor.adjustHue(hslColor.getHue() + 120);
@@ -79,12 +81,10 @@ public class Palette {
         drawRectangle(200);
         drawTextOnGraphics(200);
         graphics.dispose();
-
-        fileService.saveImageToFile(bufferedImage, nameFileAsChatId);
     }
 
-    public void applyTetradicMode(String nameFileAsChatId) {
-        initImageForEditing(nameFileAsChatId, 4);
+    public void applyTetradicMode(String chatId) {
+        initImageForEditing(chatId, 4);
 
         hslColor = new HSLColor(color);
         color = hslColor.adjustHue(hslColor.getHue() + 90);
@@ -102,12 +102,10 @@ public class Palette {
         drawRectangle(300);
         drawTextOnGraphics(300);
         graphics.dispose();
-
-        fileService.saveImageToFile(bufferedImage, nameFileAsChatId);
     }
 
-    public void applyMonochromaticMode(String nameFileAsChatId) {
-        initImageForEditing(nameFileAsChatId, 4);
+    public void applyMonochromaticMode(String chatId) {
+        initImageForEditing(chatId, 4);
 
         hslColor = new HSLColor(color);
         float luminance = hslColor.getLuminance();
@@ -129,8 +127,6 @@ public class Palette {
         drawRectangle(300);
         drawTextOnGraphics(300);
         graphics.dispose();
-
-        fileService.saveImageToFile(bufferedImage, nameFileAsChatId);
     }
 
 
@@ -158,9 +154,8 @@ public class Palette {
         hexCodes.add(hex);
     }
 
-    private void initImageForEditing(String nameFileAsChatId, int multiplier) {
-        bufferedImage = fileService.readImageFromFile(nameFileAsChatId);
-        color = new Color(bufferedImage.getRGB(0, 0));
+    private void initImageForEditing(String chatId, int multiplier) {
+        color = hexToRgb(usersHexCodes.get(chatId));
 
         bufferedImage = new BufferedImage(WIDTH, HEIGHT * multiplier, BufferedImage.TYPE_INT_RGB);
         graphics = bufferedImage.createGraphics();
@@ -178,4 +173,15 @@ public class Palette {
         hexCodes.clear();
         return stringBuilder.toString();
     }
+
+    public InputStream saveImageToInputStream() {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        try {
+            ImageIO.write(bufferedImage, "png", byteArrayOutputStream);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
+    }
+
 }

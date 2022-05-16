@@ -1,10 +1,10 @@
 package com.example.second_tlg_bot;
 
 public class Constants {
-    public static final String START ="Welcome to the bot. I can accept color hexcode (for example - #B22222 or #87CEFA) and return different color palettes.";
+    public static final String START = "Welcome to the bot. I can accept hex color code (for example - #B22222 or #87CEFA) and return different color palettes.";
     public static final String MENU = "Choose the type of color combination";
-    public static final String WRONG_HEX = "Wrong hexcode. Please enter correct color hexcode";
-    public static final String HEXCODE_COLOR_REGEX = "^#(?:[\\da-fA-F]{3}){1,2}$";
+    public static final String WRONG_HEX = "Wrong hex code. Please enter correct hex color code";
+    public static final String HEX_CODE_COLOR_REGEX = "^#(?:[\\da-fA-F]{3}){1,2}$";
 
     public static final String COMPLEMENTARY = "complementary";
     public static final String MONOCHROMATIC = "monochromatic";

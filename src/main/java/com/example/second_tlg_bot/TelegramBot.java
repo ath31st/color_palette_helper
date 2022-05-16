@@ -1,7 +1,6 @@
 package com.example.second_tlg_bot;
 
 import com.example.second_tlg_bot.service.ButtonService;
-import com.example.second_tlg_bot.service.FileService;
 import com.example.second_tlg_bot.service.SendMessageService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -22,9 +21,9 @@ public class TelegramBot extends TelegramLongPollingBot {
     private final String BOT_NAME;
     private final String BOT_TOKEN;
 
-    private FileService fileService = new FileService();
-    private Palette palette = new Palette(fileService);
-    private SendMessageService service = new SendMessageService(new ButtonService(), fileService);
+
+    private Palette palette = new Palette();
+    private SendMessageService service = new SendMessageService(new ButtonService(), palette);
 
     @Override
     public String getBotUsername() {
@@ -45,9 +44,7 @@ public class TelegramBot extends TelegramLongPollingBot {
                 sendTextMessage(chatId, START);
             } else if (inputText.equals("/help")) {
                 sendTextMessage(chatId, HELP);
-            } else if (inputText.matches(HEXCODE_COLOR_REGEX)) {
-                fileService.deleteOldFilesFromImagesDirectory();
-
+            } else if (inputText.matches(HEX_CODE_COLOR_REGEX)) {
                 palette.createPalette(chatId, inputText);
                 executeCommands(chatId);
             } else {

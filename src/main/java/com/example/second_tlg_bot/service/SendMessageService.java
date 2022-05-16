@@ -1,5 +1,6 @@
 package com.example.second_tlg_bot.service;
 
+import com.example.second_tlg_bot.Palette;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -10,8 +11,6 @@ import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 
-import java.io.File;
-
 import static com.example.second_tlg_bot.Constants.MENU;
 
 @Getter
@@ -19,7 +18,7 @@ import static com.example.second_tlg_bot.Constants.MENU;
 @RequiredArgsConstructor
 public class SendMessageService {
     private final ButtonService buttonService;
-    private final FileService fileService;
+    private final Palette palette;
 
     public SendMessage createMenuMessage(String chatId) {
         SendMessage sendMessage = new SendMessage();
@@ -52,8 +51,7 @@ public class SendMessageService {
     public SendPhoto createPhotoMessage(String chatId) {
         SendPhoto sendPhoto = new SendPhoto();
         sendPhoto.setChatId(chatId);
-        sendPhoto.setPhoto(new InputFile(new File(fileService.PATH_IMAGES_DIRECTORY
-                + chatId + fileService.FORMAT_FILE), chatId));
+        sendPhoto.setPhoto(new InputFile(palette.saveImageToInputStream(),chatId));
         return sendPhoto;
     }
 }
