@@ -17,6 +17,7 @@ import static bot.farm.color_palette_helper.Constants.*;
 @Setter
 @RequiredArgsConstructor
 public class TelegramBot extends TelegramLongPollingBot {
+    private static long COUNT = 0;
     private final int RECONNECT_PAUSE = 10000;
     private final String BOT_NAME;
     private final String BOT_TOKEN;
@@ -37,9 +38,13 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update update) {
+        COUNT++;
+        System.out.println("new requests: " + COUNT);
+
         if (update.hasMessage() && update.getMessage().hasText()) {
             String chatId = String.valueOf(update.getMessage().getChatId());
             String inputText = update.getMessage().getText();
+
             if (inputText.equals("/start")) {
                 sendTextMessage(chatId, START);
             } else if (inputText.equals("/help")) {
@@ -53,9 +58,9 @@ public class TelegramBot extends TelegramLongPollingBot {
         }
         if (update.hasCallbackQuery()) {
             String chatId = String.valueOf(update.getCallbackQuery().getMessage().getChatId());
-            String callBachDate = update.getCallbackQuery().getData();
+            String callBackDate = update.getCallbackQuery().getData();
 
-            switch (callBachDate) {
+            switch (callBackDate) {
                 case COMPLEMENTARY -> palette.applyComplementaryMode(chatId);
                 case MONOCHROMATIC -> palette.applyMonochromaticMode(chatId);
                 case ANALOGOUS -> palette.applyAnalogousMode(chatId);
