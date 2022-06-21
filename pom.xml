@@ -3,11 +3,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.example</groupId>
-    <artifactId>second_tlg_bot</artifactId>
+    <groupId>bot.farm</groupId>
+    <artifactId>color_palette_helper</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>second_tlg_bot</name>
-    <description>second_tlg_bot</description>
+    <name>color_palette_helper</name>
+    <description>color_palette_helper</description>
     <properties>
         <java.version>11</java.version>
         <telegram.version>6.0.1</telegram.version>
@@ -51,6 +51,18 @@
             <artifactId>slf4j-log4j12</artifactId>
             <version>1.7.36</version>
         </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>RELEASE</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -66,7 +78,7 @@
                         </descriptorRefs>
                         <archive>
                             <manifest>
-                                <mainClass>com.example.second_tlg_bot.App</mainClass>
+                                <mainClass>bot.farm.color_palette_helper.App</mainClass>
                             </manifest>
                         </archive>
                     </configuration>

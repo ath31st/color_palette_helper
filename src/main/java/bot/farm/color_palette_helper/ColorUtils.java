@@ -1,4 +1,4 @@
-package com.example.second_tlg_bot;
+package bot.farm.color_palette_helper;
 import java.awt.Color;
 import java.util.ArrayList;
 

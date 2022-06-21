@@ -1,4 +1,4 @@
-package com.example.second_tlg_bot;
+package bot.farm.color_palette_helper;
 
 public class App {
     public static void main(String[] args) {

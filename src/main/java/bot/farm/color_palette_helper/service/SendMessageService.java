@@ -1,6 +1,7 @@
-package com.example.second_tlg_bot.service;
+package bot.farm.color_palette_helper.service;
 
-import com.example.second_tlg_bot.Palette;
+import bot.farm.color_palette_helper.Constants;
+import bot.farm.color_palette_helper.Palette;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -10,8 +11,6 @@ import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageTe
 import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
-
-import static com.example.second_tlg_bot.Constants.MENU;
 
 @Getter
 @Setter
@@ -23,7 +22,7 @@ public class SendMessageService {
     public SendMessage createMenuMessage(String chatId) {
         SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(chatId);
-        sendMessage.setText(MENU);
+        sendMessage.setText(Constants.MENU);
         InlineKeyboardMarkup inlineKeyboardMarkup = buttonService.setInlineKeyMarkup(buttonService.createInlineButton());
         sendMessage.setReplyMarkup(inlineKeyboardMarkup);
         return sendMessage;

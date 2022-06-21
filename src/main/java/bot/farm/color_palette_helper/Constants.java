@@ -1,7 +1,7 @@
-package com.example.second_tlg_bot;
+package bot.farm.color_palette_helper;
 
 public class Constants {
-    public static final String START = "Welcome to the bot. I can accept hex color code (for example - #B22222 or #87CEFA) and return different color palettes.";
+    public static final String START = "Welcome to the bot. I can accept hex color code (for farm - #B22222 or #87CEFA) and return different color palettes.";
     public static final String MENU = "Choose the type of color combination";
     public static final String WRONG_HEX = "Wrong hex code. Please enter correct hex color code";
     public static final String HEX_CODE_COLOR_REGEX = "^#(?:[\\da-fA-F]{3}){1,2}$";

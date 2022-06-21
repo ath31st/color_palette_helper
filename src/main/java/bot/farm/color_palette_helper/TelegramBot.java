@@ -1,7 +1,7 @@
-package com.example.second_tlg_bot;
+package bot.farm.color_palette_helper;
 
-import com.example.second_tlg_bot.service.ButtonService;
-import com.example.second_tlg_bot.service.SendMessageService;
+import bot.farm.color_palette_helper.service.ButtonService;
+import bot.farm.color_palette_helper.service.SendMessageService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -11,7 +11,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
-import static com.example.second_tlg_bot.Constants.*;
+import static bot.farm.color_palette_helper.Constants.*;
 
 @Getter
 @Setter
