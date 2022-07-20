@@ -15,7 +15,7 @@ public class Constants {
             Palette types:
             1. Complementary color palettes are formed by using two colors on opposite sides of the color wheel. They are great for conveying a sense of balance.
             2. Monochromatic color schemes consist of different shades and depths of the same color. In such schemes, all colors are derived from a single color.
-            3. Analogs are created by pairing one color with two others on either side of it on the color wheel. These palettes express uniformity and consistency.
+            3. Analogous are created by pairing one color with two others on either side of it on the color wheel. These palettes express uniformity and consistency.
             4. Triadic. The combination of three colors at the corners of an equilateral triangle. This option is suitable if you need more variety in colors.
             5. Tetradic. The combination of four colors in the corners of the square. In fact, here is a combination of two pairs of complementary colors. Suitable if you need to create a colorful and varied image.
 
