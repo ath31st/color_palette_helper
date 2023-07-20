@@ -16,41 +16,41 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 @Setter
 @RequiredArgsConstructor
 public class SendMessageService {
-    private final ButtonService buttonService;
-    private final Palette palette;
+  private final ButtonService buttonService;
+  private final Palette palette;
 
-    public SendMessage createMenuMessage(String chatId) {
-        SendMessage sendMessage = new SendMessage();
-        sendMessage.setChatId(chatId);
-        sendMessage.setText(Constants.MENU);
-        InlineKeyboardMarkup inlineKeyboardMarkup = buttonService.setInlineKeyMarkup(buttonService.createInlineButton());
-        sendMessage.setReplyMarkup(inlineKeyboardMarkup);
-        return sendMessage;
-    }
+  public SendMessage createMenuMessage(String chatId) {
+    SendMessage sendMessage = new SendMessage();
+    sendMessage.setChatId(chatId);
+    sendMessage.setText(Constants.MENU);
+    InlineKeyboardMarkup inlineKeyboardMarkup = buttonService.setInlineKeyMarkup(buttonService.createInlineButton());
+    sendMessage.setReplyMarkup(inlineKeyboardMarkup);
+    return sendMessage;
+  }
 
-    public EditMessageText createEditMessage(Update update, String editMessage) {
-        EditMessageText editMessageText = new EditMessageText();
-        Integer messageId = update.getCallbackQuery().getMessage().getMessageId();
-        String chatId = String.valueOf(update.getCallbackQuery().getMessage().getChatId());
-        editMessageText.setChatId(chatId);
-        editMessageText.setMessageId(messageId);
-        editMessageText.setText(editMessage);
-        return editMessageText;
-    }
+  public EditMessageText createEditMessage(Update update, String editMessage) {
+    EditMessageText editMessageText = new EditMessageText();
+    Integer messageId = update.getCallbackQuery().getMessage().getMessageId();
+    String chatId = String.valueOf(update.getCallbackQuery().getMessage().getChatId());
+    editMessageText.setChatId(chatId);
+    editMessageText.setMessageId(messageId);
+    editMessageText.setText(editMessage);
+    return editMessageText;
+  }
 
-    public SendMessage createMessage(String chatId, String message) {
-        SendMessage sendMessage = new SendMessage();
-        sendMessage.enableMarkdown(true);
-        sendMessage.enableHtml(true);
-        sendMessage.setChatId(chatId);
-        sendMessage.setText(message);
-        return sendMessage;
-    }
+  public SendMessage createMessage(String chatId, String message) {
+    SendMessage sendMessage = new SendMessage();
+    sendMessage.enableMarkdown(true);
+    sendMessage.enableHtml(true);
+    sendMessage.setChatId(chatId);
+    sendMessage.setText(message);
+    return sendMessage;
+  }
 
-    public SendPhoto createPhotoMessage(String chatId) {
-        SendPhoto sendPhoto = new SendPhoto();
-        sendPhoto.setChatId(chatId);
-        sendPhoto.setPhoto(new InputFile(palette.saveImageToInputStream(),chatId));
-        return sendPhoto;
-    }
+  public SendPhoto createPhotoMessage(String chatId) {
+    SendPhoto sendPhoto = new SendPhoto();
+    sendPhoto.setChatId(chatId);
+    sendPhoto.setPhoto(new InputFile(palette.saveImageToInputStream(), chatId));
+    return sendPhoto;
+  }
 }
