@@ -7,6 +7,7 @@ import bot.farm.color_palette_helper.service.SendMessageService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -15,9 +16,10 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
 @Getter
 @Setter
+@Slf4j
 @RequiredArgsConstructor
 public class TelegramBot extends TelegramLongPollingBot {
-  private static long COUNT = 0;
+  private static long usageCounter = 0;
   private final int RECONNECT_PAUSE = 10000;
   private final String BOT_NAME;
   private final String BOT_TOKEN;
@@ -38,8 +40,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 
   @Override
   public void onUpdateReceived(Update update) {
-    COUNT++;
-    System.out.println("new requests: " + COUNT);
+    log.info("new requests: " + ++usageCounter);
 
     if (update.hasMessage() && update.getMessage().hasText()) {
       String chatId = String.valueOf(update.getMessage().getChatId());
@@ -66,6 +67,7 @@ public class TelegramBot extends TelegramLongPollingBot {
         case ANALOGOUS -> palette.applyAnalogousMode(chatId);
         case TRIADIC -> palette.applyTriadicMode(chatId);
         case TETRADIC -> palette.applyTetradicMode(chatId);
+        default -> throw new IllegalStateException("Unexpected value: " + callBackDate);
       }
       executeCommands(chatId);
     }

@@ -20,8 +20,8 @@ import lombok.Setter;
 @Setter
 @RequiredArgsConstructor
 public class Palette {
-  private final int WIDTH = 300;
-  private final int HEIGHT = 100;
+  private static final int WIDTH = 300;
+  private static final int HEIGHT = 100;
   private Color color;
   private Graphics graphics;
   private HSLColor hslColor;
