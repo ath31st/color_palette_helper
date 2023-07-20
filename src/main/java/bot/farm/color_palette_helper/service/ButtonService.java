@@ -12,23 +12,23 @@ public class ButtonService {
     List<InlineKeyboardButton> inlineKeyboardButtonsRow1 = new ArrayList<>();
     List<InlineKeyboardButton> inlineKeyboardButtonsRow2 = new ArrayList<>();
     InlineKeyboardButton inlineKeyboardButton1 = new InlineKeyboardButton();
-    inlineKeyboardButton1.setText("\u29DF " + Constants.COMPLEMENTARY);
+    inlineKeyboardButton1.setText("⧟ " + Constants.COMPLEMENTARY);
     inlineKeyboardButton1.setCallbackData(Constants.COMPLEMENTARY);
 
     InlineKeyboardButton inlineKeyboardButton2 = new InlineKeyboardButton();
-    inlineKeyboardButton2.setText("\u25ce " + Constants.MONOCHROMATIC);
+    inlineKeyboardButton2.setText("◎ " + Constants.MONOCHROMATIC);
     inlineKeyboardButton2.setCallbackData(Constants.MONOCHROMATIC);
 
     InlineKeyboardButton inlineKeyboardButton3 = new InlineKeyboardButton();
-    inlineKeyboardButton3.setText("\u25e1 " + Constants.ANALOGOUS);
+    inlineKeyboardButton3.setText("◡ " + Constants.ANALOGOUS);
     inlineKeyboardButton3.setCallbackData(Constants.ANALOGOUS);
 
     InlineKeyboardButton inlineKeyboardButton4 = new InlineKeyboardButton();
-    inlineKeyboardButton4.setText("\u25b3 " + Constants.TRIADIC);
+    inlineKeyboardButton4.setText("△ " + Constants.TRIADIC);
     inlineKeyboardButton4.setCallbackData(Constants.TRIADIC);
 
     InlineKeyboardButton inlineKeyboardButton5 = new InlineKeyboardButton();
-    inlineKeyboardButton5.setText("\u25a2 " + Constants.TETRADIC);
+    inlineKeyboardButton5.setText("▢ " + Constants.TETRADIC);
     inlineKeyboardButton5.setCallbackData(Constants.TETRADIC);
 
     inlineKeyboardButtonsRow1.add(inlineKeyboardButton1);

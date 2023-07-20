@@ -17,7 +17,7 @@ public class ColorUtils {
    * Initialize the color list that we have.
    */
   private ArrayList<ColorName> initColorList() {
-    ArrayList<ColorName> colorList = new ArrayList<ColorName>();
+    ArrayList<ColorName> colorList = new ArrayList<>();
     colorList.add(new ColorName("AliceBlue", 0xF0, 0xF8, 0xFF));
     colorList.add(new ColorName("AntiqueWhite", 0xFA, 0xEB, 0xD7));
     colorList.add(new ColorName("Aqua", 0x00, 0xFF, 0xFF));
@@ -178,7 +178,7 @@ public class ColorUtils {
     }
 
     if (closestMatch != null) {
-      return closestMatch.getName();
+      return closestMatch.name();
     } else {
       return "No matched color name.";
     }
@@ -209,36 +209,11 @@ public class ColorUtils {
    *
    * @author Xiaoxiao Li
    */
-  public class ColorName {
-    public int r, g, b;
-    public String name;
-
-    public ColorName(String name, int r, int g, int b) {
-      this.r = r;
-      this.g = g;
-      this.b = b;
-      this.name = name;
-    }
+  public record ColorName(String name, int r, int g, int b) {
 
     public int computeMSE(int pixR, int pixG, int pixB) {
-      return (int) (((pixR - r) * (pixR - r) + (pixG - g) * (pixG - g) + (pixB - b)
+      return (((pixR - r) * (pixR - r) + (pixG - g) * (pixG - g) + (pixB - b)
           * (pixB - b)) / 3);
-    }
-
-    public int getR() {
-      return r;
-    }
-
-    public int getG() {
-      return g;
-    }
-
-    public int getB() {
-      return b;
-    }
-
-    public String getName() {
-      return name;
     }
   }
 }

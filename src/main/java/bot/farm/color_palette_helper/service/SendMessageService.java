@@ -2,9 +2,6 @@ package bot.farm.color_palette_helper.service;
 
 import bot.farm.color_palette_helper.Constants;
 import bot.farm.color_palette_helper.Palette;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
@@ -12,13 +9,7 @@ import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 
-@Getter
-@Setter
-@RequiredArgsConstructor
-public class SendMessageService {
-  private final ButtonService buttonService;
-  private final Palette palette;
-
+public record SendMessageService(ButtonService buttonService, Palette palette) {
   public SendMessage createMenuMessage(String chatId) {
     SendMessage sendMessage = new SendMessage();
     sendMessage.setChatId(chatId);

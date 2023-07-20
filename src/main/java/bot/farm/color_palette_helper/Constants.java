@@ -1,5 +1,8 @@
 package bot.farm.color_palette_helper;
 
+import lombok.experimental.UtilityClass;
+
+@UtilityClass
 public class Constants {
   public static final String START = "Welcome to the bot. I can accept hex color code (for example - #B22222 or #87CEFA) and return different color palettes.";
   public static final String MENU = "Choose the type of color combination";
