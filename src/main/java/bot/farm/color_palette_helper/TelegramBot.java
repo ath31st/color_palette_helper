@@ -20,7 +20,7 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 @RequiredArgsConstructor
 public class TelegramBot extends TelegramLongPollingBot {
   private static long usageCounter = 0;
-  private final int RECONNECT_PAUSE = 10000;
+  private static final int RECONNECT_PAUSE = 10000;
   private final String BOT_NAME;
   private final String BOT_TOKEN;
 
@@ -40,8 +40,6 @@ public class TelegramBot extends TelegramLongPollingBot {
 
   @Override
   public void onUpdateReceived(Update update) {
-    log.info("new requests: " + ++usageCounter);
-
     if (update.hasMessage() && update.getMessage().hasText()) {
       String chatId = String.valueOf(update.getMessage().getChatId());
       String inputText = update.getMessage().getText();
