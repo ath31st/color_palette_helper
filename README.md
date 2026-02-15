@@ -1,4 +1,7 @@
-## Сolor palette helper 
+# Сolor palette helper 
+
+## Attention
+The bot is currently disabled. If you wish, you can create your own application and run it on your own server.
 
 A bot for generating color palettes. An analogue of the online services of the Itten's color wheel
 ![image info](Images/image0.png)
